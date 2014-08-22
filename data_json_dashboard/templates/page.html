@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>DATA.JSON Dashboard | DATA.GOV.HK</title>
+  <link rel="stylesheet" type="text/css" href="/tools/data-json-dashboard/static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/tools/data-json-dashboard/static/css/main.css" />
+</head>
+<body>
+<div class="container">
+  <div class="bs-docs-section">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>DATA.JSON Dashboard</h2>
+      </div>
+    </div>
+  </div>
+  <div class="bs-docs-section">
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Counts</th>
+              <th>Validation result</th>
+              <th>Harvesting result</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for provider in providers %}
+            <tr>
+              <td><a href="{{ provider.url|e }}" target="_blank">{{ provider.name|e }}</a></td>
+              <td>
+              {% if provider.check_result|length > 0 %}
+                &nbsp;
+              {% else %}
+                <p>Datasets:&nbsp;<span class="highlight">{{ provider.dataset_count|e }}</span></p>
+                <p>Resources:&nbsp;<span class="highlight">{{ provider.resource_count|e }}</span></p>
+              {% endif %}
+              </td>
+              <td>
+                <p>Last&nbsp;check:&nbsp;<span class="highlight">{{ provider.last_check_time|e }}</span></p>
+                <div class="result-list" id="check-result">
+                  <ul>
+                  {% for message in provider.check_result %}
+                    <li>{{ message|e }}</li>
+                  {% else %}
+                    <li class="success">NO ERROR FOUND</li>
+                  {% endfor %}
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <p>Last&nbsp;harvest:&nbsp;<span class="highlight">{{ provider.last_harvest_time|e }}</span></p>
+                <div class="result-list" id="harvest-result">
+                  <ul>
+                  {% for message in provider.harvest_result %}
+                    {% if message == 'NO CHANGE SINCE LAST HARVEST, SKIPPED' %}
+                      <li>{{ message|e }}</li>
+                    {% else %}
+                      <li class="notice">{{ message|e }}</li>
+                    {% endif %}
+                  {% endfor %}
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

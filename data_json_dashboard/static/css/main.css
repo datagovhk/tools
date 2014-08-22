@@ -1,0 +1,44 @@
+.result-list {
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+.result-list ul {
+    list-style-type: square;
+    margin-bottom: 0;
+    padding-left: 25px;
+}
+
+.result-list ul li {
+    font-size: 12px;
+    line-height: 110%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    word-break: normal;
+    word-wrap: normal;
+    white-space: pre-wrap;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#check-result ul li {
+    color: #cc3300;
+}
+
+#check-result ul li.success {
+    color: #339966;
+}
+
+#harvest-result ul li {
+    color: #6e6e6e;
+}
+
+#harvest-result ul li.notice {
+    color: #cc3300;
+}
+
+.highlight {
+	color: #666699;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-weight: bold;
+}
